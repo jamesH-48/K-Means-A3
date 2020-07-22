@@ -75,17 +75,16 @@ if __name__ == "__main__":
     t0 = time()
     quan_image_1 = color_quantization(original_images[0], kval, state)
     print("Finished Image 1 Quantization in %0.3fs." % (time() - t0))
-
     # Set Time
     t0 = time()
     quan_image_2 = color_quantization(original_images[1], kval, state)
     print("Finished Image 2 Quantization in %0.3fs." % (time() - t0))
-
     # Set Time
     t0 = time()
     quan_image_3 = color_quantization(original_images[2], kval, state)
     print("Finished Image 3 Quantization in %0.3fs." % (time() - t0))
+    
+    # Gather Quantized Images
     quantized_images = [quan_image_1, quan_image_2, quan_image_3]
-
-    # Print Quantized Images
+    # Print Image Comparisons
     print_images(original_images, quantized_images, img_num, kval)
