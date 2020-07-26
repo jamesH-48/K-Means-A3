@@ -3,6 +3,7 @@ from sklearn import cluster
 from skimage import io
 import matplotlib.pyplot as plt
 from time import time
+import sys
 
 # Data/Image retrieval and pre-processing
 def process_data():
@@ -43,15 +44,44 @@ def print_images(og_imgs, quan_imgs, num_imgs, kval):
     fig, axs = plt.subplots(row,col)
     fig.suptitle(title, fontsize=24)
 
+    '''
+    Don't think this is completely accurate
+    Used actual saved image size instead
+    Keeping this code here as a proof of effort to try to print the file size
+    
+    # Print Out Image Size Differences
+    print("Image Number|Original Size|Quantized Size")
+    print("           1| ", sys.getsizeof(og_imgs[0].tobytes())/1000, "KB|", sys.getsizeof(quan_imgs[0].tobytes()) / 1000, "KB")
+    print("           2| ", sys.getsizeof(og_imgs[1].tobytes()) / 1000, "KB|", sys.getsizeof(quan_imgs[1].tobytes()) / 1000, "KB")
+    print("           3| ", sys.getsizeof(og_imgs[2].tobytes()) / 1000, "KB|", sys.getsizeof(quan_imgs[2].tobytes()) / 1000, "KB")
+    '''
+
     # Plot Original Images
     axs[0,0].imshow(og_imgs[0])
     axs[1,0].imshow(og_imgs[1])
     axs[2,0].imshow(og_imgs[2])
 
+    # Save Original Images
+    io.imsave('og_1.jpg', og_imgs[0])
+    io.imsave('og_2.jpg', og_imgs[1])
+    io.imsave('og_3.jpg', og_imgs[2])
+
     # Plot Quantized Images
     axs[0,1].imshow(quan_imgs[0])
     axs[1,1].imshow(quan_imgs[1])
     axs[2,1].imshow(quan_imgs[2])
+
+    # Save Quantized Images
+    # Convert images back to uint8 for proper save
+    quan_imgs[0] = quan_imgs[0]*255
+    quan_imgs[0] = quan_imgs[0].astype(np.uint8)
+    quan_imgs[1] = quan_imgs[1] * 255
+    quan_imgs[1] = quan_imgs[1].astype(np.uint8)
+    quan_imgs[2] = quan_imgs[2] * 255
+    quan_imgs[2] = quan_imgs[2].astype(np.uint8)
+    io.imsave('q_1.jpg', quan_imgs[0])
+    io.imsave('q_2.jpg', quan_imgs[1])
+    io.imsave('q_3.jpg', quan_imgs[2])
 
     plt.show()
 
@@ -83,7 +113,7 @@ if __name__ == "__main__":
     t0 = time()
     quan_image_3 = color_quantization(original_images[2], kval, state)
     print("Finished Image 3 Quantization in %0.3fs." % (time() - t0))
-    
+
     # Gather Quantized Images
     quantized_images = [quan_image_1, quan_image_2, quan_image_3]
     # Print Image Comparisons
