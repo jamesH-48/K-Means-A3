@@ -1,3 +1,5 @@
+# James Hooper ~ NETID: jah171230
+# Hritik Panchasara ~ NETID: hhp160130
 import numpy as np
 from sklearn import cluster
 from skimage import io
