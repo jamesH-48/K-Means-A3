@@ -1,3 +1,5 @@
+# James Hooper ~ NETID: jah171230
+# Hritik Panchasara ~ NETID: hhp160130
 import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
