@@ -90,7 +90,7 @@ def print_images(og_imgs, quan_imgs, num_imgs, kval):
 # Main
 if __name__ == "__main__":
     # Set k-value
-    kval = 16
+    kval = 4
     # Set state value
     state = 0
     # Set number of images
